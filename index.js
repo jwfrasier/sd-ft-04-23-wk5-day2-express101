@@ -1,4 +1,5 @@
 const express = require("express");
+const cowsay = require("cowsay");
 const app = express();
 const PORT = 3000;
 
@@ -34,15 +35,41 @@ app.post("/capitalize_student_names", (req, res) => {
 });
 
 app.post("/add_user_id", (req, res) => {
-  //  return {
-  //  name: "Ashley",
-  //  id : 2355
-  // }
   const student = {
     name: req.body.studentName,
     id: req.body.id,
   };
   res.send(student);
+});
+
+app.get("/get_cow", (req, res) => {
+  res.send(
+    cowsay.say({
+      text: "I'm a moooodule",
+      e: "oO",
+      T: "U ",
+    })
+  );
+});
+app.post("/think_cow", (req, res) => {
+  res.send(
+    cowsay.think({
+      text: req.body.message,
+      e: "oO",
+      T: "U ",
+    })
+  );
+});
+
+app.post("/think_squirrel", (req, res) => {
+  res.send(
+    cowsay.say({
+      text: req.body.message,
+      e: "@@",
+      r: true,
+      T: "U ",
+    })
+  );
 });
 
 app.listen(PORT, console.log(`running on port ${PORT}`));
